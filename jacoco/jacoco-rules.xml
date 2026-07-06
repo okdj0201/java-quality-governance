@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JaCoCo カバレッジルール定義。
+    java-quality-governance で一元管理し、各プロジェクトの parent POM から参照する。
+
+    除外パターンと最低カバレッジ閾値を定義。
+    閾値は brownfield プロジェクトの段階的改善を前提に低めに設定。
+-->
+<jacoco-rules>
+    <!--
+        除外パターン: JaCoCo のカバレッジ計測から除外するクラス。
+        各プロジェクトの POM で <excludes> に転記して使用する。
+        パターンは Ant 形式 (**/Foo.class)。
+    -->
+    <excludes>
+        <!-- エントリーポイント -->
+        <exclude>**/*Application.class</exclude>
+
+        <!-- 設定クラス -->
+        <exclude>**/config/**</exclude>
+
+        <!-- DTO / リクエスト / レスポンス -->
+        <exclude>**/common/dto/**</exclude>
+        <exclude>**/common/constant/**</exclude>
+        <exclude>**/common/enums/**</exclude>
+
+        <!-- JPA エンティティ (getter/setter 中心) -->
+        <exclude>**/domain/entity/**</exclude>
+
+        <!-- MapStruct 生成コード -->
+        <exclude>**/*MapperImpl.class</exclude>
+
+        <!-- AOP アスペクト (横断的関心事) -->
+        <exclude>**/aspect/**</exclude>
+
+        <!-- イベントクラス (POJO) -->
+        <exclude>**/event/*Event.class</exclude>
+    </excludes>
+
+    <!--
+        最低カバレッジ閾値 (brownfield 段階的改善用)。
+        - Phase 1 (導入初期): LINE 30%, BRANCH 20%
+        - Phase 2 (安定後):   LINE 50%, BRANCH 40%
+        - Phase 3 (目標):     LINE 70%, BRANCH 60%
+        各プロジェクトの POM で <rules> に転記して使用する。
+    -->
+    <thresholds phase="1">
+        <line>0.30</line>
+        <branch>0.20</branch>
+    </thresholds>
+</jacoco-rules>

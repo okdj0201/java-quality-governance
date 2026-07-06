@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.proquip</groupId>
+    <artifactId>governance-rules</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>ProQuip :: Governance Rules</name>
+    <description>
+        静的解析ルールファイル (Checkstyle / SpotBugs) を一元管理し、
+        jar として配布するためのモジュール。
+        各プロジェクトは本 artifact を dependency として参照し、
+        classpath 経由でルールファイルを取得する。
+    </description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>checkstyle</directory>
+                <targetPath>checkstyle</targetPath>
+            </resource>
+            <resource>
+                <directory>spotbugs</directory>
+                <targetPath>spotbugs</targetPath>
+            </resource>
+            <resource>
+                <directory>jacoco</directory>
+                <targetPath>jacoco</targetPath>
+            </resource>
+        </resources>
+    </build>
+</project>
